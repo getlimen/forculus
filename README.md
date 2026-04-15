@@ -24,6 +24,24 @@ Part of the Limen compose bundle. When you `docker compose up` Limen on the cont
 
 In active development. See [`limen/docs/superpowers/plans/2026-04-14-plan-03-wireguard-forculus.md`](https://github.com/getlimen/limen/blob/main/docs/superpowers/plans/2026-04-14-plan-03-wireguard-forculus.md).
 
+## Development
+
+Forculus needs the `wg`/`wg-quick` tools (Linux only). Local dev on Windows is limited to non-WG code paths (HTTP endpoints, limen connectivity). Full local testing runs under Docker.
+
+### Sync contracts from limen
+
+Limen.Contracts source is checked in locally under `src/Limen.Contracts/`. When it changes upstream, run:
+
+```bash
+bash scripts/sync-contracts.sh
+```
+
+### Build the Docker image
+
+```bash
+docker build -t ghcr.io/getlimen/forculus:dev -f src/Forculus.API/Dockerfile .
+```
+
 ## License
 
 [Apache 2.0](LICENSE)

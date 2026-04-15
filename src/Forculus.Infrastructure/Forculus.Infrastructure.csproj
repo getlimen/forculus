@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <IsAotCompatible>true</IsAotCompatible>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Forculus.Domain\Forculus.Domain.csproj" />
+    <ProjectReference Include="..\Forculus.Application\Forculus.Application.csproj" />
+    <ProjectReference Include="..\Limen.Contracts\Limen.Contracts.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Http" Version="10.0.6" />
+  </ItemGroup>
+</Project>

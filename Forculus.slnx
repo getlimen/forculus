@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Forculus.API/Forculus.API.csproj" />
+    <Project Path="src/Forculus.Application/Forculus.Application.csproj" />
+    <Project Path="src/Forculus.Domain/Forculus.Domain.csproj" />
+    <Project Path="src/Forculus.Infrastructure/Forculus.Infrastructure.csproj" />
+    <Project Path="src/Forculus.Tests/Forculus.Tests.csproj" />
+  </Folder>
+</Solution>
