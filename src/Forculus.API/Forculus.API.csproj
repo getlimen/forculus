@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <UserSecretsId>forculus-dev</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Forculus.Application\Forculus.Application.csproj" />
+    <ProjectReference Include="..\Forculus.Infrastructure\Forculus.Infrastructure.csproj" />
+  </ItemGroup>
+</Project>
