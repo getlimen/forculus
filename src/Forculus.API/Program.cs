@@ -9,7 +9,7 @@ using Mediator;
 var builder = WebApplication.CreateBuilder(args);
 
 #region Configure Services
-builder.Services.AddMediator(opt => opt.ServiceLifetime = ServiceLifetime.Scoped);
+builder.Services.AddMediator();
 
 builder.Services.AddSingleton<IWireGuardDriver>(sp =>
     new WgCliDriver(sp.GetRequiredService<ILogger<WgCliDriver>>()));
