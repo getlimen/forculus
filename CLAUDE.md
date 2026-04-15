@@ -3,7 +3,13 @@
 > **Project**: Forculus — component of [Limen](https://github.com/getlimen/limen)
 > **Role**: Server-side WireGuard endpoint. All agents (Limentinus instances) connect their tunnels into Forculus. Forculus subprocesses `wg`/`wg-quick` to apply peer config pushed from Limen.
 
-**For full project context, read [`limen/docs/HANDOFF.md`](https://github.com/getlimen/limen/blob/main/docs/HANDOFF.md).**
+**For full project context, read [`limen/docs/HANDOFF.md`](https://github.com/getlimen/limen/blob/main/docs/HANDOFF.md) and [`limen/docs/CONVENTIONS.md`](https://github.com/getlimen/limen/blob/main/docs/CONVENTIONS.md).**
+
+## Workflow rules (enforced, apply to every repo in `getlimen`)
+
+- **Never work on `main`.** Create issue (labeled) → branch `<type>/<issue>_<PascalCaseName>` → PR (labeled) with `Closes #<issue>` → squash-merge + delete branch.
+- **Use CLI generators whenever one exists.** `dotnet new`, `dotnet ef`, `gh issue create`, `gh pr create`, etc. If you don't know the command, search online before hand-writing boilerplate.
+- **No AI / Claude attribution** in commits or PRs.
 
 ## Etymology
 *Forculus* — Roman god of the **door panel**. Ovid and Augustine both record him as one of the deities Romans invoked for specific parts of a door. Forculus guards the solid structure of the gate itself — the thing between inside and outside.
