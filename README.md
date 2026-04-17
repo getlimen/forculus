@@ -1,46 +1,27 @@
 # Forculus
 
-> *Roman god of the **door panel*** — invoked in Roman religious practice as one of the deities guarding specific parts of a door.
+> *Latin: "door panel"* — Roman deity of the solid door structure, the barrier between inside and outside.
 
-Forculus is the **WireGuard hub** component of [Limen](https://github.com/getlimen/limen). All managed nodes' agents connect their tunnels into Forculus. Peer management is driven by Limen via a small HTTP API.
+**Forculus** is the WireGuard hub component of [Limen](https://github.com/getlimen/limen). It runs alongside Limen on the control node and manages the server-side WireGuard interface via `wg syncconf`.
 
-## Role in the Limen platform
+## Not a standalone tool
 
-- **Listens on:** UDP 51820 (WireGuard) + HTTP 3004 (control API)
-- **Control API:** REST — `POST /peers`, `DELETE /peers/{publicKey}`, `GET /config`
-- **WireGuard backend:** kernel module via `wg` CLI subprocess (`wg syncconf`)
-- **State:** stateless — full config pulled from Limen on boot + every 60s as reconcile
-- **Deployed on:** the `control`-role node (alongside Limen and Postgres) in v1
+Forculus is deployed as part of the Limen control node stack. It has no database — peer config is pulled from Limen's API and reconciled every 60 seconds.
 
-## How it's installed
+## Features
 
-Part of the Limen compose bundle. When you `docker compose up` Limen on the control node, Forculus comes up too.
+- **Kernel WireGuard** via `wg` CLI subprocess
+- **HTTP API** for peer management (POST/DELETE /peers, GET /config, GET /stats)
+- **Periodic reconciliation** — pulls full config from Limen, diffs, applies
+- **Boot recovery** — fetches config from Limen on startup with retry
 
 ## Tech stack
 
-.NET 10 / NativeAOT • `wg` / `wg-quick` CLI subprocess • `System.Net.Http` • ASP.NET Core Minimal APIs
+.NET 10 / ASP.NET Core • NativeAOT • `wg`/`wg-quick` subprocess
 
-## Status
+## Architecture
 
-In active development. See [`limen/docs/superpowers/plans/2026-04-14-plan-03-wireguard-forculus.md`](https://github.com/getlimen/limen/blob/main/docs/superpowers/plans/2026-04-14-plan-03-wireguard-forculus.md).
-
-## Development
-
-Forculus needs the `wg`/`wg-quick` tools (Linux only). Local dev on Windows is limited to non-WG code paths (HTTP endpoints, limen connectivity). Full local testing runs under Docker.
-
-### Sync contracts from limen
-
-Limen.Contracts source is checked in locally under `src/Limen.Contracts/`. When it changes upstream, run:
-
-```bash
-bash scripts/sync-contracts.sh
-```
-
-### Build the Docker image
-
-```bash
-docker build -t ghcr.io/getlimen/forculus:dev -f src/Forculus.API/Dockerfile .
-```
+See the [Limen design spec](https://github.com/getlimen/limen/blob/main/docs/superpowers/specs/2026-04-14-limen-design.md).
 
 ## License
 
